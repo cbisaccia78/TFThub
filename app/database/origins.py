@@ -2,22 +2,21 @@ from flask_appbuilder import Model
 from sqlalchemy import Column, Integer, String, ForeignKey, text
 from sqlalchemy.orm import relationship
 from app import db
-from app.database.assoc_table import champion_origin
+from app.database.assoc_table import champion_trait
 from sqlalchemy_json import MutableJson
 import random
 
 
-class Origin(Model):
-    __tablename__ = "origins"
+class Trait(Model):
+    __tablename__ = "traits"
     id = Column(Integer, primary_key=True)
     champions = relationship(
         "Champion",
-        secondary=champion_origin,
-        back_populates="origins")
+        secondary=champion_trait,
+        back_populates="traits")
     name = Column(String, nullable=False)
-    name = Column(String, nullable=False)
-    cost = Column(Integer)
-    abilities = Column(MutableJson)
+    type = Column(String, nullable=False)
+    description = Column(String)
 
     def __repr__(self):
         return f"{self.device_name()} - {self.template_name()} - {self.serial_number} - {self.asset_tag}"

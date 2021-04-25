@@ -12,6 +12,7 @@ def pop_champs():
     datamodel = create_champion_model()
     datamodel.import_data(data=json_data.get("champions"))
 
+
 def run(tft_version, updated):
     if not updated:
         holder = {
