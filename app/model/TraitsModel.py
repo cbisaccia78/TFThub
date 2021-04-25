@@ -22,7 +22,7 @@ class TraitModel(SQLAInterface):
         return data
 
     def export_json(self, items: list):
-        data = {"name": "traits", "version": appversion()}
+        data = {"name": "traits"}
         trait_data = self.export_items(items)
         data.update(trait_data)
         outfile = write_json(data)

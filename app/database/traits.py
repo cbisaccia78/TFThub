@@ -28,11 +28,14 @@ class Trait(Model):
 
     @staticmethod
     def add(
-
+        name=None, key=None, type=None, description=None, sets=None
     ):
-        # add a hardware
         trait = Trait(
-
+            name=name,
+            key=key,
+            type=type,
+            description=description,
+            sets=sets
         )
         db.session.add(Trait)
         db.session.commit()
@@ -40,21 +43,33 @@ class Trait(Model):
 
     def as_dict(self):
         data = {
-
+            'name': self.name,
+            'key': self.key,
+            'type': self.type,
+            'description': self.description,
+            'sets': self.sets
         }
         return data
 
     @staticmethod
     def from_dict(data):
         new_item = Trait(
-
+            name=data.get('name'),
+            key=data.get('key'),
+            type=data.get('type'),
+            description=data.get('description'),
+            sets={'sets': data.get('sets')}
         )
         return new_item
 
     @staticmethod
     def get_fields():
         fields = [
-
+            'name',
+            'key',
+            'type',
+            'description',
+            'sets'
         ]
         return fields
 
