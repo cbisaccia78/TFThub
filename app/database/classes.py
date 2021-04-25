@@ -2,6 +2,7 @@ from flask_appbuilder import Model
 from sqlalchemy import Column, Integer, String, ForeignKey, text
 from sqlalchemy.orm import relationship
 from app import db
+from app.database.assoc_table import champion_classe
 from sqlalchemy_json import MutableJson
 import random
 
@@ -9,7 +10,10 @@ import random
 class Classe(Model):
     __tablename__ = "classes"
     id = Column(Integer, primary_key=True)
-    parent_id = Column(Integer, ForeignKey('parent.id'))
+    champions = relationship(
+        "Champion",
+        secondary=champion_classe,
+        back_populates="classes")
     name = Column(String, nullable=False)
     abilities = Column(MutableJson)
 

@@ -2,6 +2,7 @@ from flask_appbuilder import Model
 from sqlalchemy import Column, Integer, String, ForeignKey, ARRAY
 from sqlalchemy.orm import relationship
 from app import db
+from app.database.assoc_table import champion_classe, champion_origin
 from app.database.origins import Origin
 from app.database.classes import Classe
 from sqlalchemy_json import MutableJson
@@ -12,8 +13,14 @@ class Champion(Model):
     __tablename__ = "champions"
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
-    origin = relationship("Origin")
-    classe = relationship("Classe")
+    origins = relationship(
+        "Origin",
+        secondary=champion_origin,
+        back_populates="champions")
+    classes = relationship(
+        "Classe",
+        secondary=champion_classe,
+        back_populates="champions")
     cost = Column(Integer)
     abilities = Column(MutableJson)
 
