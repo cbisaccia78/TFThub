@@ -2,9 +2,8 @@ from flask_appbuilder import Model
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
 from app import db
-from app.database.assoc_table import champion_classe, champion_origin
-from app.database.origins import Origin
-from app.database.classes import Classe
+from app.database.assoc_table import champion_trait
+from app.database.traits import Trait
 from sqlalchemy_json import MutableJson
 import random
 
@@ -13,13 +12,9 @@ class Champion(Model):
     __tablename__ = "champions"
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
-    origins = relationship(
-        "Origin",
-        secondary=champion_origin,
-        back_populates="champions")
-    classes = relationship(
-        "Classe",
-        secondary=champion_classe,
+    traits = relationship(
+        "Trait",
+        secondary=champion_trait,
         back_populates="champions")
     cost = Column(Integer)
     abilities = Column(MutableJson)

@@ -1,4 +1,4 @@
-\import json
+import json
 
 from app.model.ChampionsModel import create_champion_model
 from app.model.TraitsModel import create_trait_model
