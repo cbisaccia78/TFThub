@@ -12,9 +12,7 @@ class Champion(Model):
     __tablename__ = "champions"
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
-    origin_id = Column(ARRAY, ForeignKey("origin.id"))
     origin = relationship("Origin")
-    classe_id = Column(Integer, ForeignKey("classe.id"))
     classe = relationship("Classe")
     cost = Column(Integer)
     abilities = Column(MutableJson)

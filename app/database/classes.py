@@ -9,6 +9,7 @@ import random
 class Classe(Model):
     __tablename__ = "classes"
     id = Column(Integer, primary_key=True)
+    parent_id = Column(Integer, ForeignKey('parent.id'))
     name = Column(String, nullable=False)
     abilities = Column(MutableJson)
 
