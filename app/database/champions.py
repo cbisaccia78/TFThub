@@ -35,14 +35,13 @@ class Champion(Model):
 
     @staticmethod
     def add(
-            origin_ids=None,
-            classes_id=None,
-            name=None,
-            asset_tag=None,
-            info=None,
+            name=None, champion_id=None, cost=None, ability=None
     ):
         champion = Champion(
-
+            name=name,
+            champion_id=champion_id,
+            cost=cost,
+            ability=ability
         )
         db.session.add(champion)
         db.session.commit()
@@ -51,29 +50,29 @@ class Champion(Model):
     def as_dict(self):
         data = {
             'name': self.name,
-            'origins': self.get_origins(),
-            'classes': self.get_classes(),
+            'champion_id': self.champion_id,
             'cost': self.cost,
             'abilities': self.abilities
         }
         return data
 
     @staticmethod
-    def csv_to_dict(row):
-        data = {
-        }
-        return data
-
-    @staticmethod
     def from_dict(data):
         new_item = Champion(
+            name=data.get('name'),
+            champion_id=data.get('champion_id'),
+            cost=data.get('cost'),
+            abilities=data.get('abilities')
         )
         return new_item
 
     @staticmethod
     def get_fields():
         fields = [
-
+            'name',
+            'champion_id',
+            'cost',
+            'abilities'
         ]
         return fields
 
