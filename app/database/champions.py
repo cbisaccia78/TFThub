@@ -23,13 +23,16 @@ class Champion(Model):
     def __repr__(self):
         return f"{self.name}"
 
+    def get_traits(self):
+        return [trait.name for trait in self.traits]
+
     def get_origins(self):
-        if self.origins:
-            return [origin.name for origin in self.origins]
+        if self.traits:
+            return [trait.name for trait in self.traits if trait.type == 'origin']
 
     def get_classes(self):
         if self.classes:
-            return [classe.name for classe in self.classes]
+            return [trait.name for trait in self.traits if trait.type == 'classe']
 
     @staticmethod
     def add(
@@ -39,7 +42,6 @@ class Champion(Model):
             asset_tag=None,
             info=None,
     ):
-        # add a hardware
         champion = Champion(
 
         )
