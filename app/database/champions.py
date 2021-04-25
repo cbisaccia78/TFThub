@@ -1,5 +1,5 @@
 from flask_appbuilder import Model
-from sqlalchemy import Column, Integer, String, ForeignKey, text
+from sqlalchemy import Column, Integer, String, ForeignKey, ARRAY
 from sqlalchemy.orm import relationship
 from app import db
 from app.database.origins import Origin
@@ -12,7 +12,7 @@ class Champion(Model):
     __tablename__ = "champions"
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
-    origin_id = Column(Integer, ForeignKey("origin.id"))
+    origin_id = Column(ARRAY, ForeignKey("origin.id"))
     origin = relationship("Origin")
     classe_id = Column(Integer, ForeignKey("classe.id"))
     classe = relationship("Classe")
