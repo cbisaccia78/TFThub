@@ -1,5 +1,5 @@
 from flask_appbuilder import Model
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, ForeignKey, text
 from sqlalchemy.orm import relationship
 from app import db
 from app.database.assoc_table import champion_trait
@@ -17,3 +17,51 @@ class Trait(Model):
     name = Column(String, nullable=False)
     type = Column(String, nullable=False)
     description = Column(String)
+
+    def __repr__(self):
+        return f"{self.name}"
+
+    def get_champions(self):
+        return [champion.name for champion in self.champions]
+
+    @staticmethod
+    def add(
+
+    ):
+        # add a hardware
+        trait = Trait(
+
+        )
+        db.session.add(Trait)
+        db.session.commit()
+        return trait
+
+    def as_dict(self):
+        data = {
+
+        }
+        return data
+
+    @staticmethod
+    def from_dict(data):
+        new_item = Trait(
+
+        )
+        return new_item
+
+    @staticmethod
+    def get_fields():
+        fields = [
+
+        ]
+        return fields
+
+    @staticmethod
+    def get_all():
+        traits = db.session.query(Trait).all()
+        return traits
+
+    @staticmethod
+    def get_by_type(type):
+        traits = db.session.query(Trait).filter_by(type=type).all()
+        return traits

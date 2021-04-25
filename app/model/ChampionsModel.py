@@ -1,5 +1,6 @@
 from app import db
 from app.custom.functions import write_json, read_json
+from app.database.champions import Champion
 from app.model.TraitsModel import create_trait_model
 from flask_appbuilder.models.sqla.interface import SQLAInterface
 
