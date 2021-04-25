@@ -41,8 +41,10 @@ class ChampionModel(SQLAInterface):
 
     def import_json(self, json_data):
         data = read_json(json_data)
-        self.origin_datamodel.import_data(data=data.get('origins'))
-        self.classes_datamodel.import_data(data=data.get('classes'))
+        for champion in data.get('champions'):
+            self.origin_datamodel.import_data(champion=champion, data=champion.get('origins'))
+            self.classes_datamodel.import_data(champion=champion, data=champion.get('classes'))
+        self.import_data(data.get('champions'))
 
     @staticmethod
     def get_all():
