@@ -37,14 +37,14 @@ class Champion(Model):
 
     @staticmethod
     def add(
-            device_id=None,
-            template_id=None,
-            serial_number=None,
+            origin_ids=None,
+            classes_id=None,
+            name=None,
             asset_tag=None,
             info=None,
     ):
         # add a hardware
-        hardware = Hardware(
+        champion = Champion(
             device_id=device_id,
             template_id=template_id,
             serial_number=serial_number,
