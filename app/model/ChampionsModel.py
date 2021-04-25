@@ -4,7 +4,7 @@ from flask_appbuilder.models.sqla.interface import SQLAInterface
 
 
 def create_champion_model():
-    return ChampionModel(Champions, db.session)
+    return ChampionModel(Champion, db.session)
 
 
 class ChampionModel(SQLAInterface):
