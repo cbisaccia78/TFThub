@@ -12,6 +12,7 @@ class Champion(Model):
     __tablename__ = "champions"
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
+    champion_id = Column(String, nullable=False)
     traits = relationship(
         "Trait",
         secondary=champion_trait,
