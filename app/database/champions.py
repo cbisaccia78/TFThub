@@ -5,7 +5,6 @@ from app import db
 from app.database.assoc_table import champion_trait
 from app.database.traits import Trait
 from sqlalchemy_json import MutableJson
-import random
 
 
 class Champion(Model):

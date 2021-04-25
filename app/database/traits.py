@@ -15,8 +15,10 @@ class Trait(Model):
         secondary=champion_trait,
         back_populates="traits")
     name = Column(String, nullable=False)
+    key = Column(String, nullable=False)
     type = Column(String, nullable=False)
     description = Column(String)
+    sets = Column(MutableJson)
 
     def __repr__(self):
         return f"{self.name}"
