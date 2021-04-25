@@ -1,7 +1,7 @@
-import requests
-import json
+\import json
 
 from app.model.ChampionsModel import create_champion_model
+from app.model.TraitsModel import create_trait_model
 
 
 def pop_champs():
@@ -10,19 +10,19 @@ def pop_champs():
         data = myfile.read()
     json_data = json.loads(data)
     datamodel = create_champion_model()
-    datamodel.import_data(data=json_data.get("champions"))
+    datamodel.import_data(data=json_data.get("champions")) # coming in as an array of dicts
+
+def pop_traits():
+    filepath = "conf/traits.json"
+    with open(filepath, 'r') as myfile:
+        data = myfile.read()
+    json_data = json.loads(data)
+    datamodel = create_trait_model()
+    datamodel.import_data(data=json_data.get("traits")) # coming in as an array of dicts
 
 
 def run(tft_version, updated):
     if not updated:
-        holder = {
-            "name": "champions",
-            "version": "4.5",
-            "champions": [
+       print('to_be_updated')
 
-            ]
-        }
-        r = requests.get("https://tftactics.gg/champions")
-        with open('conf/champions.json', 'w+') as myfile:
-            print('put the values into the file')
 
