@@ -10,10 +10,6 @@ import random
 class Trait(Model):
     __tablename__ = "trait"
     id = Column(Integer, primary_key=True)
-    champions = relationship(
-        "Champion",
-        secondary=champion_trait,
-        back_populates="traits")
     name = Column(String, nullable=False)
     key = Column(String, nullable=False)
     type = Column(String, nullable=False)
@@ -76,6 +72,11 @@ class Trait(Model):
     @staticmethod
     def get_all():
         traits = db.session.query(Trait).all()
+        return traits
+
+    @staticmethod
+    def get_by_key(key):
+        traits = db.session.query(Trait).filter_by(key=key).first()
         return traits
 
     @staticmethod

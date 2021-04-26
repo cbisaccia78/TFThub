@@ -1,5 +1,5 @@
 from flask_appbuilder import Model
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 from app import db
 from app.database.assoc_table import champion_trait
@@ -12,33 +12,37 @@ class Champion(Model):
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
     champion_id = Column(String, nullable=False)
+    traits = Column(MutableJson)
+    """
     traits = relationship(
         "Trait",
         secondary=champion_trait,
         back_populates="champions")
+    """
     cost = Column(Integer)
 
     def __repr__(self):
         return f"{self.name}"
 
     def get_traits(self):
-        return [trait.name for trait in self.traits]
+        return [Trait.get_by_key(key) for key in self.traits.get('traits')]
 
     def get_origins(self):
         if self.traits:
-            return [trait.name for trait in self.traits if trait.type == 'origin']
+            return [trait for trait in self.get_traits() if trait.type == 'origin']
 
     def get_classes(self):
         if self.classes:
-            return [trait.name for trait in self.traits if trait.type == 'classe']
+            return [trait for trait in self.get_traits() if trait.type == 'class']
 
     @staticmethod
     def add(
-            name=None, champion_id=None, cost=None, ability=None
+            name=None, champion_id=None, traits=None, cost=None
     ):
         champion = Champion(
             name=name,
             champion_id=champion_id,
+            traits=traits,
             cost=cost,
         )
         db.session.add(champion)
@@ -49,6 +53,7 @@ class Champion(Model):
         data = {
             'name': self.name,
             'champion_id': self.champion_id,
+            'traits': self.traits.get('traits'),
             'cost': self.cost,
         }
         return data
@@ -58,6 +63,7 @@ class Champion(Model):
         new_item = Champion(
             name=data.get('name'),
             champion_id=data.get('championId'),
+            traits={'traits': data.get('traits')},
             cost=data.get('cost')
         )
         return new_item
@@ -67,6 +73,7 @@ class Champion(Model):
         fields = [
             'name',
             'champion_id',
+            'traits',
             'cost',
         ]
         return fields

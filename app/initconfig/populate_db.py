@@ -1,5 +1,6 @@
 import json
 from app import db
+from app.database.champions import Champion
 from app.model.ChampionsModel import create_champion_model, ChampionModel
 from app.model.TraitsModel import create_trait_model, TraitModel
 
@@ -26,5 +27,5 @@ def run():
     db.create_all()
     pop_traits()
     pop_champs()
-
+    print(Champion.get_all()[0].get_traits())
 
