@@ -1,7 +1,7 @@
 import json
-
-from app.model.ChampionsModel import create_champion_model
-from app.model.TraitsModel import create_trait_model
+from app import db
+from app.model.ChampionsModel import create_champion_model, ChampionModel
+from app.model.TraitsModel import create_trait_model, TraitModel
 
 
 def pop_champs():
@@ -22,9 +22,8 @@ def pop_traits():
     datamodel.import_data(data=json_data.get("traits"))  # coming in as an array of dicts
 
 
-def run(tft_version, updated):
-    if not updated:
-       print('to_be_updated')
+def run():
+    db.create_all()
     pop_traits()
     pop_champs()
 

@@ -34,11 +34,9 @@ from . import views
 
 
 @app.cli.command("initdb")
-@click.argument("tft_version")
-@click.argument("updated")
-def initdb(tft_version, updated):
-    from initconfig import populate_db
-    errors = populate_db.run(tft_version, updated)
+def initdb():
+    from app.initconfig import populate_db
+    errors = populate_db.run()
     if not errors:
         click.echo(
             click.echo(click.style(f"Populate lookup tables. Done.", fg="green"))

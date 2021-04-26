@@ -8,7 +8,7 @@ import random
 
 
 class Trait(Model):
-    __tablename__ = "traits"
+    __tablename__ = "trait"
     id = Column(Integer, primary_key=True)
     champions = relationship(
         "Champion",

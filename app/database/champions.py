@@ -8,7 +8,7 @@ from sqlalchemy_json import MutableJson
 
 
 class Champion(Model):
-    __tablename__ = "champions"
+    __tablename__ = "champion"
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
     champion_id = Column(String, nullable=False)
@@ -17,7 +17,6 @@ class Champion(Model):
         secondary=champion_trait,
         back_populates="champions")
     cost = Column(Integer)
-    abilities = Column(MutableJson)
 
     def __repr__(self):
         return f"{self.name}"
@@ -41,7 +40,6 @@ class Champion(Model):
             name=name,
             champion_id=champion_id,
             cost=cost,
-            ability=ability
         )
         db.session.add(champion)
         db.session.commit()
@@ -52,7 +50,6 @@ class Champion(Model):
             'name': self.name,
             'champion_id': self.champion_id,
             'cost': self.cost,
-            'abilities': self.abilities
         }
         return data
 
@@ -60,9 +57,8 @@ class Champion(Model):
     def from_dict(data):
         new_item = Champion(
             name=data.get('name'),
-            champion_id=data.get('champion_id'),
-            cost=data.get('cost'),
-            abilities=data.get('abilities')
+            champion_id=data.get('championId'),
+            cost=data.get('cost')
         )
         return new_item
 
@@ -72,7 +68,6 @@ class Champion(Model):
             'name',
             'champion_id',
             'cost',
-            'abilities'
         ]
         return fields
 
