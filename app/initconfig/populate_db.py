@@ -27,5 +27,4 @@ def run():
     db.create_all()
     pop_traits()
     pop_champs()
-    print(Champion.get_all()[0].get_traits())
-
+    champs = Champion.get_all()
