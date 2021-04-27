@@ -3,6 +3,7 @@ import logging
 import click
 from flask import Flask
 from flask_appbuilder import AppBuilder, SQLA
+from app.view.index import MyIndexView
 
 """
  Logging configuration
@@ -14,7 +15,7 @@ logging.getLogger().setLevel(logging.DEBUG)
 app = Flask(__name__)
 app.config.from_object("config")
 db = SQLA(app)
-appbuilder = AppBuilder(app, db.session)
+appbuilder = AppBuilder(app, db.session, indexview=MyIndexView)
 
 
 """
