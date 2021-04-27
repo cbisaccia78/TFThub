@@ -1,9 +1,12 @@
 from flask import render_template
 from flask_appbuilder.models.sqla.interface import SQLAInterface
 from flask_appbuilder import ModelView, ModelRestApi
+from app.view import
 
 from . import appbuilder, db
 
+appbuilder.add_view()
+appbuilder.add_view_no_menu()
 """
     Create your Model based REST API::
 
