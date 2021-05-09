@@ -6,7 +6,6 @@ from . import appbuilder, db
 
 # appbuilder.add_view()
 from .view import TeamCompView
-
 appbuilder.add_view(
         TeamCompView,
         "My View",
@@ -14,7 +13,8 @@ appbuilder.add_view(
         category="My Category",
         category_icon='fa-envelope'
     )
-# appbuilder.add_view_no_menu()
+
+"""appbuilder.add_view_no_menu(TeamCompView, "TeamCompView")"""
 """
     Create your Model based REST API::
 
